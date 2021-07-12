@@ -1,6 +1,8 @@
-# Disallows invalid RuleTester test cases with the output the same as the code. (prefer-output-null)
+# Disallow invalid RuleTester test cases where the `output` matches the `code` (prefer-output-null)
 
-(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) automatically fixes problems reported by this rule.
+⚒️ The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#--fix) can automatically fix some of the problems reported by this rule.
+
+Instead of repeating the test case `code`, using `output: null` is more concise and makes it easier to distinguish whether a test case provides an autofix.
 
 ## Rule Details
 
@@ -12,10 +14,10 @@ Examples of **incorrect** code for this rule:
 /* eslint eslint-plugin/prefer-output-null: error */
 
 new RuleTester().run('foo', bar, {
-    valid: [],
-    invalid: [
-      { code: 'foo', output: 'foo', errors: [{ message: 'bar' }] },
-    ]
+  valid: [],
+  invalid: [
+    { code: 'foo', output: 'foo', errors: [{ message: 'bar' }] },
+  ],
 });
 ```
 
@@ -25,9 +27,9 @@ Examples of **correct** code for this rule:
 /* eslint eslint-plugin/prefer-output-null: error */
 
 new RuleTester().run('foo', bar, {
-    valid: [],
-    invalid: [
-      { code: 'foo', output: null, errors: [{ message: 'bar' }] },
-    ]
+  valid: [],
+  invalid: [
+    { code: 'foo', output: null, errors: [{ message: 'bar' }] },
+  ],
 });
 ```

@@ -1,7 +1,8 @@
-# require rules to implement a meta.docs.url property (require-meta-docs-url)
+# Require rules to implement a `meta.docs.url` property (require-meta-docs-url)
 
-`meta.docs.url` property is the official location to store a URL to their documentation in the rule metadata.
-Some integration tools will show the URL to users to understand rules.
+⚒️ The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#--fix) can automatically fix some of the problems reported by this rule.
+
+A rule can store the URL to its documentation page in `meta.docs.url`. This enables integration tools / IDEs / editors to conveniently provide the link to developers so that they can better understand the rule.
 
 ## Rule Details
 
@@ -17,11 +18,11 @@ This rule has an option.
 }
 ```
 
-- `pattern` (`string`) ... A pattern to enforce rule's document URL. It replaces `{{name}}` placeholder by each rule name. The rule name is the basename of each rule file. Default is undefined.
+- `pattern` (`string`) ... A pattern to enforce rule's document URL. It replaces `{{name}}` placeholder by each rule name. The rule name is the basename of each rule file. Default is `undefined` which allows any URL.
 
 If you set the `pattern` option, this rule adds `meta.docs.url` property automatically when you execute `eslint --fix` command.
 
-The following patterns are considered warnings:
+Examples of **incorrect** code for this rule:
 
 ```js
 
@@ -29,8 +30,7 @@ The following patterns are considered warnings:
 
 module.exports = {
   meta: {},
-  create(context) {
-  }
+  create (context) {},
 };
 
 ```
@@ -42,11 +42,10 @@ module.exports = {
 module.exports = {
   meta: {
     docs: {
-      url: undefined
-    }
+      url: undefined,
+    },
   },
-  create(context) {
-  }
+  create (context) {},
 };
 
 ```
@@ -58,16 +57,15 @@ module.exports = {
 module.exports = {
   meta: {
     docs: {
-      url: "wrong URL"
-    }
+      url: 'wrong URL',
+    },
   },
-  create(context) {
-  }
+  create (context) {},
 };
 
 ```
 
-The following patterns are not warnings:
+Examples of **correct** code for this rule:
 
 ```js
 
@@ -76,11 +74,10 @@ The following patterns are not warnings:
 module.exports = {
   meta: {
     docs: {
-      url: "a URL"
-    }
+      url: 'a URL',
+    },
   },
-  create(context) {
-  }
+  create (context) {},
 };
 
 ```
@@ -92,11 +89,10 @@ module.exports = {
 module.exports = {
   meta: {
     docs: {
-      url: "path/to/rule-name.md"
-    }
+      url: 'path/to/rule-name.md',
+    },
   },
-  create(context) {
-  }
+  create (context) {},
 };
 
 ```
@@ -109,19 +105,16 @@ For example:
 **.eslintrc.js**:
 
 ```js
-"use strict"
-
-const version = require("./package.json").version
+// const version = require("./package.json").version;
 
 module.exports = {
-  plugins: ["eslint-plugin"],
-  // ... leaving out ...
+  plugins: ['eslint-plugin'],
   rules: {
-    "eslint-plugin/require-meta-docs-url": ["error", {
+    'eslint-plugin/require-meta-docs-url': ['error', {
       pattern: `path/to/v${version}/docs/rules/{{name}}.md`,
     }],
-  }
-}
+  },
+};
 ```
 
 **package.json**:
@@ -134,8 +127,7 @@ module.exports = {
     "test": "... leaving out ...",
     "preversion": "npm test",
     "version": "eslint . --fix && git add ."
-  },
-  // ... leaving out ...
+  }
 }
 ```
 
@@ -143,7 +135,7 @@ Then `npm version <type>` command will update every rule to the new version's UR
 
 > npm runs `preversion` script on the current version, runs `version` script on the new version, and commits and makes a tag.
 >
-> Further reading: https://docs.npmjs.com/cli/version
+> Further reading: <https://docs.npmjs.com/cli/version>
 
 ## When Not To Use It
 
